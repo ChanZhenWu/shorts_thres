@@ -56,7 +56,10 @@ open (Thres, "< $shorts");
 		if ($nodes =~ "nodes")
 		{
 			if(substr($nodes,0,1) eq "!"){
-			$short_thres-> write($node, 0, substr($nodes, 0, rindex($nodes,"!")), $format_data);  ## Nodes ##
+			$nodes =~ s/(^\s+|\s+$)//g;                     #clear all spacing
+			$node_name = substr($nodes, 0, rindex($nodes,"!"));
+			$node_name =~ s/(^\s+|\s+$)//g;                     #clear all spacing
+			$short_thres-> write($node, 0, $node_name, $format_data);  ## Nodes ##
 			$short_thres-> write($node, 1, substr($nodes, rindex($nodes,"!")), $format_data);  ## Thres ##
 			$short_thres-> write($node, 2, "-", $format_data);  ## Delay ##
 				}
